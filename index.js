@@ -50,7 +50,7 @@ connection.connect(err=>{
 
 app.use(cors());
 
-app.get('/',(req, res)=>{
+app.get('8081/display',(req, res)=>{
     connection.query(SELECT_ALL_PRODUCTS_QUERY,(err, results)=>{
         if(err){
             return res.send(err)
@@ -62,7 +62,7 @@ app.get('/',(req, res)=>{
         }
     })
 });
-app.get('/pro/add',(req, res)=>{
+app.get('/8081/gather',(req, res)=>{
     const{id,adult,backdrop_path,genre_ids,original_language,original_title,overview,popularity,poster_path,release_date,title,video,vote_average,vote_count} = req.query;
     const INSERT_PRODUCTS_QUERY = `INSERT INTO movies3(id,adult,backdrop_path,genre_ids,original_language,original_title,overview,popularity,poster_path,release_date,title,video,vote_average,vote_count) 
     VALUES('${id}','${adult}','${backdrop_path}','${genre_ids}','${original_language}','${original_title}','${overview}','${popularity}','${poster_path}','${release_date}','${title}','${video}','${vote_average}','${vote_count}');`;
