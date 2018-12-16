@@ -65,7 +65,13 @@ app.get('/',(req, res)=>{
 app.get('/pro/add',(req, res)=>{
     const {id,name,year} =req.query;
     const INSERT_PRODUCTS_QUERY = `INSERT INTO movies2(id,name,year) VALUES('${id}','${name}','${year}');`;
-    connection.query(INSERT_PRODUCTS_QUERY,(err, results)=>{
+    request('https://api.themoviedb.org/3/discover/movie?api_key=4fba833d14a0e854b19fc2ba5dc2f8bc&certification_country=US&certification=R&sort_by=vote_average.desc&primary_release_date.gte=2015-01-01&primary_release_date.lte=2015-12-31&with_genres=878&sort_by=popularity.desc&limit=100',{json:true},(err,res,body)=>{
+    if (err){return console.log(err);}
+    var movies = body
+    console.log(body.results[0].title);
+    console.log(body.explanation)
+})
+    connection.query(INSERT_PRODUCTS_QUERY,(err, movies)=>{
         if(err){
             return res.send(err)
         }
