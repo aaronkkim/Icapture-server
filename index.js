@@ -4,14 +4,27 @@ const mysql = require ('mysql');
 const request = require('request');
 const axios = require('axios');
 
-axios.get('https://api.themoviedb.org/3/discover/movie?api_key=4fba833d14a0e854b19fc2ba5dc2f8bc&language=en-US&sort_by=popularity.asc&primary_release_date.gte=2015-01-01&primary_release_date.lte=2015-12-31')
+const getMovies =  () => {
+    axios.get('https://api.themoviedb.org/3/discover/movie?api_key=4fba833d14a0e854b19fc2ba5dc2f8bc&certification_country=US&certification=R&sort_by=vote_average.desc&primary_release_date.gte=2015-01-01&primary_release_date.lte=2015-12-31&with_genres=878&sort_by=popularity.desc&limit=100')
 .then(response=> {
-    console.log(response.data.url);
-    console.log(response.data.explanation);
+    //console.log(response.data)
+   // console.log(response);
+    const results =response.data
+    //console.log(results)
+    var movieRows =[]})
+    .then(results=>{results.forEach((movie)=>{
+        console.log(movie.title+'Hi')
+    })
+    console.log(results)
+    //console.log(response.data.explanation);
 })
-.catch(error =>{
-    console.log(error);
-})
+.catch(  (error) => {
+    const response = error.response
+    console.log(response +'error')
+  })
+  }
+  
+
 
 const app = express();
 
@@ -58,4 +71,5 @@ app.get('/pro/add',(req, res)=>{
 });
 app.listen(4000,()=>{
     console.log('Products server listening on port 4000')
+    console.log(getMovies())
 });
