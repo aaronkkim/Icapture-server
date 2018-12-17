@@ -9,7 +9,7 @@ const queryStringParams = fields.map(function() {
     return '?';
 });
 const queryString = 'insert into movies3(' + fields.join() + ') values (' + queryStringParams + ');';
-console.log(queryString);
+//console.log(queryString);
 const SELECT_ALL_MOVIES_QUERY ='SELECT* FROM movies3'
 
 const connection = mysql.createConnection({
@@ -66,8 +66,9 @@ app.get('/gather',(req, res)=>{
                 if(err) {
                     console.log('error', err); // eslint-disable-line no-console
                 }
-                console.log(res)
+                console.log("this is the response"+res)
             });
+            connection.end();
             
 });
     })
